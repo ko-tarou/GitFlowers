@@ -7,15 +7,23 @@ struct MainView: View {
     
     var body : some View {
         VStack{
-            Button(action: {
-                
-            }){
-                Image(systemName: "gift")
-            }
-            Button(action: {
-                
-            }){
-                Image(systemName: "person.crop.circle")
+            HStack{
+                Spacer()
+                VStack(spacing: 10){
+                    Button(action: {
+                        
+                    }){
+                        Image(systemName: "gift")
+                            .foregroundStyle(Color(UIColor(hex: "229B00")))
+                    }
+                    Button(action: {
+                        
+                    }){
+                        Image(systemName: "person.crop.circle")
+                            .foregroundStyle(Color(UIColor(hex: "229B00")))
+                    }
+                }
+                .padding(.trailing,50)
             }
             
             Text("\(CommitCount)")
