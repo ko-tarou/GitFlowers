@@ -8,13 +8,17 @@ import SwiftUI
 
 struct StatusScreen: View {
     var body: some View {
-        VStack(alignment: .leading){
-            UserHeaderView(icon: "hoge", name: "hoge", userID: "hogeID")
-            GraphCardView()
-            
-            LinkButtonView()
+        ScrollView{
+            VStack(alignment: .leading){
+                UserHeaderView(icon: "hoge", name: "hoge", userID: "hogeID")
+                GraphCardView()
+                
+                LinkButtonView()
+                
+                PinedRepositorys()
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
@@ -59,28 +63,35 @@ struct GraphCardView: View {
 }
 
 // ボタン達
-struct LinkButton {
+struct LinkButton: Identifiable {
+    let id = UUID() // ForEachのために必要
     var buttonIcon: String
     var buttonName: String
-    
-    
 }
 
 struct LinkButtonView: View {
-    let linkNames = [
-        "リポジトリ", "Star済み", "Organization", "プロジェクト"
-    ]
+    let linkButtons: [LinkButton] = [
+            LinkButton(buttonIcon: "folder", buttonName: "リポジトリ"),
+            LinkButton(buttonIcon: "star", buttonName: "Star済み"),
+            LinkButton(buttonIcon: "person.3", buttonName: "Organization"),
+            LinkButton(buttonIcon: "hammer", buttonName: "プロジェクト")
+        ]
     
     var body: some View {
         List {
-            ForEach(0 ..< linkNames.count){index in
+            ForEach(linkButtons){link in
                 VStack{
                     Button(action: {}){
-                        Text(linkNames[index])
+                        HStack{
+                            Image(systemName: link.buttonIcon)
+                                .frame(width: 30)
+                            Text(link.buttonName)
+                        }
                     }
                 }
             }
         }
+        .frame(height: 250)
     }
 }
 
@@ -101,6 +112,7 @@ struct PinedRepositorys: View {
             }
             .padding()
         }
+        .scrollIndicators(.hidden)
     }
 }
 
@@ -169,7 +181,9 @@ struct CardOfRepository: View {
 }
 
 #Preview{
-    CardOfRepository(repository: Repository(icon: "icon", userID: "user1", title: "pygame", info: "pygameの何か", numStar: 3, lang: "python"))
+//    CardOfRepository(repository: Repository(icon: "icon", userID: "user1", title: "pygame", info: "pygameの何か", numStar: 3, lang: "python"))
+//    
+//    PinedRepositorys()
     
-    PinedRepositorys()
+    LinkButtonView()
 }
