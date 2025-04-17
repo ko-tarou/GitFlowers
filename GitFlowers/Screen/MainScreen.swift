@@ -6,9 +6,22 @@ struct MainView: View {
     var CommitCount : Int = 0
     
     var body : some View {
-        Text("\(CommitCount)")
-            .font(.system(size: 100))
-            .foregroundStyle(Color(UIColor(hex: "229B00")))
+        VStack{
+            Button(action: {
+                
+            }){
+                Text("Test")
+            }
+            Button(action: {
+                
+            }){
+                Text("Test")
+            }
+            
+            Text("\(CommitCount)")
+                .font(.system(size: 100))
+                .foregroundStyle(Color(UIColor(hex: "229B00")))
+        }
     }
 }
 
