@@ -11,6 +11,8 @@ struct StatusScreen: View {
         VStack(alignment: .leading){
             UserHeaderView(icon: "hoge", name: "hoge", userID: "hogeID")
             GraphCardView()
+            
+            LinkButtonView()
         }
         .padding()
     }
@@ -54,4 +56,120 @@ struct GraphCardView: View {
                     .stroke(Color.gray, lineWidth: 1)
             )
     }
+}
+
+// ボタン達
+struct LinkButton {
+    var buttonIcon: String
+    var buttonName: String
+    
+    
+}
+
+struct LinkButtonView: View {
+    let linkNames = [
+        "リポジトリ", "Star済み", "Organization", "プロジェクト"
+    ]
+    
+    var body: some View {
+        List {
+            ForEach(0 ..< linkNames.count){index in
+                VStack{
+                    Button(action: {}){
+                        Text(linkNames[index])
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// ピン留めリポジトリ
+struct PinedRepositorys: View {
+    var repositories: [Repository] = [
+        Repository(icon: "icon", userID: "user1", title: "pygame", info: "pygameの何か", numStar: 3, lang: "python"),
+        Repository(icon: "star", userID: "user2", title: "React", info: "reactの何か", numStar: 2, lang: "Typescript")
+    ]
+    
+    var body: some View {
+        ScrollView(.horizontal){
+            HStack{
+                ForEach(repositories){ repo in
+                    CardOfRepository(repository: repo)
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+// 構造体
+struct Repository: Identifiable {
+    let id = UUID()
+    
+    let icon: String
+    let userID: String
+    
+    let title: String
+    let info: String
+    
+    let numStar: Int
+    let lang: String
+}
+
+// リポジトリ情報カード
+struct CardOfRepository: View {
+    let repository: Repository
+    
+    var body: some View {
+        ZStack(alignment: .leading){
+            Color.white
+            
+            VStack(alignment: .leading){
+                HStack{
+                    Image(systemName: repository.icon)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .background(.blue)
+                        .clipShape(Circle())
+                    
+                    Text(repository.userID)
+                        .foregroundStyle(.gray)
+                }
+                
+                Text(repository.title)
+                    .font(.title3)
+                
+                Text(repository.info)
+                
+                HStack {
+                    HStack{
+                        Image(systemName: "star.fill")
+                        Text(String(repository.numStar))
+                    }
+                    
+                    HStack{
+                        Image(systemName: "circle.fill")
+                        Text(repository.lang)
+                    }
+                }
+            }
+            .padding()
+        }
+        .aspectRatio(4 / 2, contentMode: .fit)
+        .frame(width: 300)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.gray, lineWidth: 1)
+        )
+
+    }
+    
+}
+
+#Preview{
+    CardOfRepository(repository: Repository(icon: "icon", userID: "user1", title: "pygame", info: "pygameの何か", numStar: 3, lang: "python"))
+    
+    PinedRepositorys()
 }
