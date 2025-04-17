@@ -78,20 +78,21 @@ struct LinkButtonView: View {
         ]
     
     var body: some View {
-        List {
-            ForEach(linkButtons){link in
-                VStack{
-                    Button(action: {}){
-                        HStack{
-                            Image(systemName: link.buttonIcon)
-                                .frame(width: 30)
-                            Text(link.buttonName)
-                        }
+        VStack(alignment: .leading, spacing: 8) {
+            ForEach(linkButtons) { link in
+                Button(action: {}) {
+                    HStack {
+                        Image(systemName: link.buttonIcon)
+                            .frame(width: 30)
+                        Text(link.buttonName)
                     }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(8)
                 }
             }
         }
-        .frame(height: 250)
     }
 }
 
