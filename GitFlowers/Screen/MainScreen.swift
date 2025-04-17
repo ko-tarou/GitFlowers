@@ -10,12 +10,12 @@ struct MainView: View {
             Button(action: {
                 
             }){
-                Text("Test")
+                Image(systemName: "gift")
             }
             Button(action: {
                 
             }){
-                Text("Test")
+                Image(systemName: "person.crop.circle")
             }
             
             Text("\(CommitCount)")
