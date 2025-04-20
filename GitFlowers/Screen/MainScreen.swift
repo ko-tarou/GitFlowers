@@ -39,14 +39,21 @@ struct MainView: View {
                             )
                     }
                 }
-                .padding(.trailing,50)
-                .padding(.bottom,100)
+                .padding(.trailing,30)
+                .padding(.bottom,20)
             }
+            
+            ProgressView(value: 20,total: 100)
+                .tint(Color(UIColor(hex: "229B00")))
+                .frame(height: 20)
+                .scaleEffect(x: 1,y: 40, anchor:.center)
+                .clipShape(Capsule())
+                .padding(.horizontal,100)
             
             Text("\(CommitCount)")
                 .font(.system(size: 100))
                 .foregroundStyle(Color(UIColor(hex: "229B00")))
-                .padding(.bottom,200)
+                .padding(.bottom,400)
         }
     }
 }
@@ -57,6 +64,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+// カラーコードで指定するやつ
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         let v = Int("000000" + hex, radix: 16) ?? 0
