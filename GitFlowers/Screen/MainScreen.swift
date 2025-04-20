@@ -14,21 +14,39 @@ struct MainView: View {
                         
                     }){
                         Image(systemName: "gift")
+                            .font(.title)
                             .foregroundStyle(Color(UIColor(hex: "229B00")))
+                            .cornerRadius(50)
+                            .padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color(UIColor(hex: "229B00")),
+                                        lineWidth: 2)
+                            )
                     }
                     Button(action: {
                         
                     }){
                         Image(systemName: "person.crop.circle")
+                            .font(.title)
                             .foregroundStyle(Color(UIColor(hex: "229B00")))
+                            .cornerRadius(50)
+                            .padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color(UIColor(hex: "229B00")),
+                                        lineWidth: 2)
+                            )
                     }
                 }
                 .padding(.trailing,50)
+                .padding(.bottom,100)
             }
             
             Text("\(CommitCount)")
                 .font(.system(size: 100))
                 .foregroundStyle(Color(UIColor(hex: "229B00")))
+                .padding(.bottom,200)
         }
     }
 }
