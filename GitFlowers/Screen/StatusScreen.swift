@@ -8,19 +8,44 @@ import SwiftUI
 
 struct StatusScreen: View {
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading){
-                UserHeaderView(icon: "hoge", name: "hoge", userID: "hogeID")
-                GraphCardView()
-                
-                LinkButtonView()
-                
-                PinedRepositorys()
+        ZStack(alignment: .top){
+            HeaderView()
+            
+            ScrollView{
+                VStack(alignment: .leading){
+                    
+                    UserHeaderView(icon: "hoge", name: "hoge", userID: "hogeID")
+                    GraphCardView()
+                    
+                    GitHubStatsView()
+                    
+    //                LinkButtonView()
+                    
+                    PinedRepositorys()
+                }
+                .padding(.horizontal)
+                .padding(.top, 0)
             }
-            .padding()
+            .padding(.top, 65)
         }
+        
+        
+        
     }
 }
+
+// ヘッダー
+struct HeaderView: View {
+    var body: some View {
+        HStack{
+            Color.gray
+        }
+        .frame(width: .infinity, height: 120)
+        .ignoresSafeArea()
+        .padding(0)
+    }
+}
+
 
 // 一番上
 struct UserHeaderView: View {
@@ -61,6 +86,30 @@ struct GraphCardView: View {
             )
     }
 }
+
+
+// github stats
+struct GitHubStatsView: View {
+    var body: some View {
+        Text("GitHub Stats")
+        
+        ZStack{
+            Color.white
+            
+            AsyncImage(url: URL(string: "https://github-readme-stats.vercel.app/api?username=mitsui6969&theme=onedark&show_icons=true&cache_seconds=1&style=flat&title_color=ffffff&bg_color=0d1117")) {image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 400)
+            } placeholder: {
+                ProgressView()
+            }
+        }
+        .aspectRatio(16/9, contentMode: .fit)
+        
+    }
+}
+
 
 // ボタン達
 struct LinkButton: Identifiable {
@@ -186,5 +235,15 @@ struct CardOfRepository: View {
 //    
 //    PinedRepositorys()
     
-    LinkButtonView()
+//    LinkButtonView()
+    HeaderView()
+    
+    UserHeaderView(icon: "test", name: "test", userID: "test")
+    
+    GitHubStatsView()
+}
+
+#Preview{
+    StatusScreen()
+    
 }
