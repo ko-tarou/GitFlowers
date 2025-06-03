@@ -15,9 +15,13 @@ struct LoginScreen: View {
 
 // github連携ボタン
 struct ButtonGitHub: View {
+    @StateObject private var viewModel = LoginViewModel()
+    @State private var username: String = ""
+    
     var body: some View {
         Button(action: {
-            // ここに処理
+            // 取得
+            viewModel.login(username: "mitsui6969")
         }){
             HStack{
                 Image("GitHubIcon")
@@ -38,9 +42,6 @@ struct ButtonGitHub: View {
     }
 }
 
-#Preview {
-    ButtonGitHub()
-}
 
 #Preview {
     LoginScreen()
