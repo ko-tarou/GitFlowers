@@ -12,22 +12,22 @@ struct GitHubUser: Identifiable, Codable {
     let avatarURLString: String
     var avatarURL: URL? { URL(string: avatarURLString) }
     let name: String?
-//    let bio: String?
-//    let followers: Int
-//    let following: Int
-//    let publicRepos: Int
-//    let htmlURL: String
+    let bio: String?
+    let followers: Int
+    let following: Int
+    let publicRepos: Int
+    let htmlURL: String
 
     enum CodingKeys: String, CodingKey {
         case id
         case login
         case avatarURLString = "avatar_url"
         case name
-//        case bio
-//        case followers
-//        case following
-//        case publicRepos = "public_repos"
-//        case htmlURL = "html_url"
+        case bio
+        case followers
+        case following
+        case publicRepos = "public_repos"
+        case htmlURL = "html_url"
     }
 }
 
